@@ -8,6 +8,7 @@ function App() {
     <div className="App">
       <div className="content">
         <h1>Realestate App</h1>
+        {console.log(import.meta.env)}
       </div>
     </div>
   );
