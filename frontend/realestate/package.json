@@ -3,12 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "dev": "vite --mode dev",
-    "build:alpha": "vite build --mode alpha",
-    "build:preprod": "vite build --mode preprod",
-    "build:prod": "vite build --mode prod"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^17.0.2",

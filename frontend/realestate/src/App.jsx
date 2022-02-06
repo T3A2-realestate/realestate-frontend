@@ -1,14 +1,15 @@
-import { useState } from "react";
-import "./App.css";
+import { useState,useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  useEffect(()=>{
+    console.log(import.meta.env.VITE_APP_API_ENDPOINT)
+  },[]
+)
 
   return (
     <div className="App">
       <div className="content">
-        <h1>Realestate App</h1>
-        {console.log(import.meta.env)}
+        <h1>Real estate App</h1>
       </div>
     </div>
   );
