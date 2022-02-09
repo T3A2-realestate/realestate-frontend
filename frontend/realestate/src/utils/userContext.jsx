@@ -15,7 +15,7 @@ export const userContext = createContext({
   signUp: () => {},
 });
 
-const userProvider = ({ children }) => {
+const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, userState);
   const signIn = (data) => signInUser(data, dispatch);
   const signUp = (data) => signUpUser(data, dispatch);
@@ -26,4 +26,4 @@ const userProvider = ({ children }) => {
   );
 };
 
-export default userProvider;
+export default UserProvider;
