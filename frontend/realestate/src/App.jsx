@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react";
+import NavBar from './components/NavBar'
 
 function App() {
   useEffect(()=>{
@@ -8,9 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="content">
-        <h1>Real estate App</h1>
-      </div>
+      <NavBar />
     </div>
   );
 }
