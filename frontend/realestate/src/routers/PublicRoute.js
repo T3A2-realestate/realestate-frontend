@@ -1,4 +1,4 @@
-// allows a user to access a route only if they're not logged in (e.g login page)
+// If the user is logged in then the user can access to the homepage
 
 import { Route, Redirect } from 'react-router-dom'
 
