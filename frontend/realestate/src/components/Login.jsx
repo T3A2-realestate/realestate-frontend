@@ -8,18 +8,20 @@ import NavBar from './NavBar';
 import FormContainer from './Form/FormContainer'
 import Form from './Form/Form'
 import FormHeader from './Form/FormHeader'
+import FormSubheader from './Form/FormSubheader'
 
 
 function Login() {
-const  text = 'Welcome Back'
+const  header = 'Welcome Back'
+const  subheader = 'Enter your credentials to access your account'
     
     return (
      
      <FormContainer>
      <Form>
-     <FormHeader text={text}>
+     <FormHeader text={header} />
+     <FormSubheader text={subheader} />
 
-     </FormHeader>
 
      </Form>
      </FormContainer>
