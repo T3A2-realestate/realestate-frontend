@@ -1,6 +1,23 @@
-// It requires the user to log in before access to the page content
-import { Route, Redirect } from 'react-router-dom'
+import React, { Fragment, useContext } from 'react'
+import { useHistory } from 'react-router'
+import { userContext } from '../utils/userContext'
+import Loading from '../layout/Loading'
 
-export default function PrivateRoute({ children, ...props }) {
-  return localStorage.getItem('authToken') ? <Route {...props}>{children}</Route> : <Redirect to='/login' />
+const PrivateRoutes = (props) => {
+
+    const history = useHistory()
+    const {state: currentUserState} = useContext(userContext)
+
+    return (
+        <Fragment>
+            { localStorage.getItem('token') ? 
+               ( currentUserState.user ? 
+                props.children : <Loading />)
+            :
+             history.push('/')
+             }
+        </Fragment>
+    )
 }
+
+export default PrivateRoutes
