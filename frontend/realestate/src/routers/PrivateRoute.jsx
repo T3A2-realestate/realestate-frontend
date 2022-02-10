@@ -5,16 +5,16 @@ import Loading from '../pages/Loading'
 
 const PrivateRoutes = (props) => {
     
-    const navigateTo = useNavigate()
-    const {state: currentUserState} = useContext(userContext)
+    const navigate = useNavigate()
+    const {state: userState} = useContext(userContext)
 
     return (
         <Fragment>
             { localStorage.getItem('token') ? 
-               ( currentUserState.user ? 
+               ( userState.user ? 
                 props.children : <Loading />)
             :
-            navigateTo('/')
+            navigate('/')
              }
         </Fragment>
     )

@@ -1,11 +1,13 @@
 import React, { useContext, createContext,useEffect } from 'react';
-import NavBar from './components/NavBar'
+//Components
+import Login from './components/Login';
 
-// API
-import API from './utils/api';
+
+// Loading
+import Loading from './pages/Loading'
 //Router
 import PrivateRoutes from './routers/PrivateRoute';
-import { BrowserRouter as Router,Routes,Route, useNavigate  } from 'react-router-dom'
+import { Routes,Route} from 'react-router-dom'
 //Context
 import {userContext} from'./utils/userContext'
 
@@ -21,6 +23,7 @@ function App() {
   if (unloadedUser){
     fetchUser()
   }
+
   // once the user state is changed then it will be rerendered
   useEffect(() => {
   },[])
@@ -32,9 +35,9 @@ function App() {
     {unloadedUser ?
       <Loading/>
       :
-
-       <div>1</div>
-
+      <Routes>
+        <Route exact path='/' element={<Login/>}  />
+      </Routes>
     }
 
     </>
