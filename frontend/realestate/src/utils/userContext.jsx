@@ -1,4 +1,3 @@
-import Context from "./globalContext";
 import React, { useReducer, createContext } from "react";
 import reducer from "./reducer";
 import { signUpUser, signInUser,getUser } from "../services/authServices";
@@ -8,7 +7,7 @@ const userState = {
   userLoaded: false,
 };
 
-export const userContext = createContext({
+export const userContext= createContext({
   state: userState,
   dispatch: () => {},
   signIn: () => {},
@@ -22,9 +21,9 @@ const UserProvider = ({ children }) => {
   const signUp = (data) => signUpUser(data, dispatch);
   const getUserData = () => getUser(dispatch);
   return (
-    <Context.Provider value={{ state, dispatch, signIn, signUp,getUserData }}>
+    <userContext.Provider value={{ state, dispatch,signIn,signUp,getUserData}}>
       {children}
-    </Context.Provider>
+    </userContext.Provider>
   );
 };
 

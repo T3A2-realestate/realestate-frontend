@@ -1,12 +1,13 @@
 import axios from 'axios'
 // An axios instance is created and this instance is for fetching custom request to the url with specific endpoint
-export default API = axios.create({
+
+export const API = axios.create({
 	// The base URL is required in an axios instance
 	baseURL: import.meta.env.VITE_APP_API_ENDPOINT || "http://localhost:3000",
 	// I set the time out for request to be 10 seconds
-	timeout = 10000,
+	timeout : 10000,
     // I set the request can have cookies
-    withCredentials = true
+    withCredentials : true
 })
 
 // assingning to request headers authorization the bearer and getting the token 
@@ -79,6 +80,5 @@ API.interceptors.request.use((config) => {
         }
     }
 );
-
 
 export default API

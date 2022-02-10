@@ -1,11 +1,11 @@
 import React, { Fragment, useContext } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { userContext } from '../utils/userContext'
-import Loading from '../layout/Loading'
+import Loading from '../pages/Loading'
 
 const PrivateRoutes = (props) => {
-
-    const history = useHistory()
+    
+    const navigateTo = useNavigate()
     const {state: currentUserState} = useContext(userContext)
 
     return (
@@ -14,7 +14,7 @@ const PrivateRoutes = (props) => {
                ( currentUserState.user ? 
                 props.children : <Loading />)
             :
-             history.push('/')
+            navigateTo('/')
              }
         </Fragment>
     )
