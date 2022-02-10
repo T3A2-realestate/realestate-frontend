@@ -9,6 +9,7 @@ import FormContainer from './Form/FormContainer'
 import Form from './Form/Form'
 import FormHeader from './Form/FormHeader'
 import FormSubheader from './Form/FormSubheader'
+import LogInForm from './Form/LogInForm'
 
 
 function Login() {
@@ -21,8 +22,8 @@ const  subheader = 'Enter your credentials to access your account'
      <Form>
      <FormHeader text={header} />
      <FormSubheader text={subheader} />
-
-
+     
+     <LogInForm/>
      </Form>
      </FormContainer>
  
