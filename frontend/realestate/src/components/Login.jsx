@@ -1,16 +1,21 @@
 import { useContext, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+
 
 //Context
 import {userContext} from'../utils/userContext'
-//Components
+// Components
 import NavBar from './NavBar';
+
+// Redirect method
+import { useNavigate } from 'react-router-dom'
+
+
+// Login Components
 import FormContainer from './Form/FormContainer'
 import Form from './Form/Form'
 import FormHeader from './Form/FormHeader'
 import FormSubheader from './Form/FormSubheader'
 import LogInForm from './Form/LogInForm'
-
 
 function Login() {
 const  header = 'Welcome Back'

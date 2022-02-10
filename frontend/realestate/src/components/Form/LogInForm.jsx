@@ -1,17 +1,44 @@
-import React from "react";
+import React, {useState,useContext} from 'react'
+// Context
+import {userContext} from'../../utils/userContext'
+
+// Redirect method
+import { useNavigate } from 'react-router-dom'
 function LogInForm(props) {
+  const defaultFormValues = {
+    email: '',
+    password: '',
+    errMessage:''
+}
+const [formValues, setFormValues] = useState(defaultFormValues);
+const navigate = useNavigate()
+const {state: userState,signIn} = useContext(userContext)
+
+const handleChange = (e) => {
+  setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value
+  })
+}
+
+const handleSubmit = async (event) => {
+  event.preventDefault()
+  signIn({
+    email: formValues.email,
+    password:formValues.password
+  })
+  
+  }
   return (
-    <div class="mt-10">
-          <form action="#">
-            <div class="flex flex-col mb-5">
-              <label
-                for="email"
-                class="mb-1 text-xs tracking-wide text-gray-600"
-                >E-Mail Address:</label
-              >
-              <div class="relative">
-                <div
-                  class="
+    <div className="mt-10">
+      <form onSubmit={handleSubmit}>
+        <div class="flex flex-col mb-5">
+          <label for="email" className="mb-1 text-xs tracking-wide text-gray-600">
+            E-Mail Address:
+          </label>
+          <div className="relative">
+            <div
+              className="
                     inline-flex
                     items-center
                     justify-center
@@ -22,15 +49,17 @@ function LogInForm(props) {
                     w-10
                     text-gray-400
                   "
-                >
-                  <i class="fas fa-at text-blue-500"></i>
-                </div>
+            >
+              <i className="fas fa-at text-blue-500"></i>
+            </div>
 
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  class="
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formValues.email}
+              onChange={handleChange}
+              className="
                     text-sm
                     placeholder-gray-500
                     pl-10
@@ -41,19 +70,20 @@ function LogInForm(props) {
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-                  placeholder="Enter your email"
-                />
-              </div>
-            </div>
-            <div class="flex flex-col mb-6">
-              <label
-                for="password"
-                class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-                >Password:</label
-              >
-              <div class="relative">
-                <div
-                  class="
+              placeholder="Enter your email"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col mb-6">
+          <label
+            for="password"
+            className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+          >
+            Password:
+          </label>
+          <div className="relative">
+            <div
+              className="
                     inline-flex
                     items-center
                     justify-center
@@ -64,17 +94,19 @@ function LogInForm(props) {
                     w-10
                     text-gray-400
                   "
-                >
-                  <span>
-                    <i class="fas fa-lock text-blue-500"></i>
-                  </span>
-                </div>
+            >
+              <span>
+                <i className="fas fa-lock text-blue-500"></i>
+              </span>
+            </div>
 
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  class="
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formValues.password}
+              onChange={handleChange}
+              className="
                     text-sm
                     placeholder-gray-500
                     pl-10
@@ -85,15 +117,15 @@ function LogInForm(props) {
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-                  placeholder="Enter your password"
-                />
-              </div>
-            </div>
+              placeholder="Enter your password"
+            />
+          </div>
+        </div>
 
-            <div class="flex w-full">
-              <button
-                type="submit"
-                class="
+        <div className="flex w-full">
+          <button
+            type="submit"
+            className="
                   flex
                   mt-2
                   items-center
@@ -110,28 +142,25 @@ function LogInForm(props) {
                   duration-150
                   ease-in
                 "
+          >
+            <span className="mr-2 uppercase">Sign In</span>
+            <span>
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <span class="mr-2 uppercase">Sign In</span>
-                <span>
-                  <svg
-                    class="h-6 w-6"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </div>
-          </form>
+                <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+          </button>
         </div>
-    
+      </form>
+    </div>
   );
 }
 
