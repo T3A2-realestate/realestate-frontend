@@ -82,7 +82,7 @@ function LogInForm({ linkSignUp }) {
         </div>
         <div className="flex flex-col mb-6">
           <label
-            for="password"
+            htmlFor="password"
             className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
           >
             Password:

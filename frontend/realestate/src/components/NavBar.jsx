@@ -87,7 +87,7 @@ function NavBar({ is_loggedIn }) {
                   ) : (
                     <>
                       <Link
-                        to="/log_in"
+                        to="/sign_In"
                         className=" hover:bg-gray-600 text-black px-3 py-2 rounded-md text-lg font-medium"
                       >
                         Log In
@@ -150,7 +150,7 @@ function NavBar({ is_loggedIn }) {
                 ) : (
                   <>
                     <Link
-                      to="/log_in"
+                      to="/sign_In"
                       className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
                     >
                       Log In

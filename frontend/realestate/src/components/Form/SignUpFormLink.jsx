@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 function SignUpFormLink({ linkSignIn }) {
   return (
-    <div class="flex justify-center items-center mt-6">
-      <span class="ml-2">
+    <div className="flex justify-center items-center mt-6">
+      <span className="ml-2">
         You {linkSignIn.status} have an account?
         <Link
           to="/register"

@@ -32,7 +32,7 @@ function App() {
     <NarBar is_loggedIn={is_loggedIn}/>
       <Routes>
         <Route exact path='/' element={<Login/>}  />
-        <Route exact path='/Sign_In' element={<Login/>}  />
+        <Route exact path='/sign_In' element={<Login/>}  />
         <Route exact path='/sign_up' element={<SignUp/>}  />
 
       </Routes>
