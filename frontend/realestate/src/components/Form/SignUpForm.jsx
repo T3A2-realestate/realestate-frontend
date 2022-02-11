@@ -9,40 +9,76 @@ import { useNavigate } from "react-router-dom";
 import SignUpFormLink from "./SignUpFormLink";
 
 // Form validation
-import { useFormik } from "formik"
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 
 function SignUpForm({ linkSignIn }) {
-  const defaultFormValues = {
-    phone: "",
-    email: "",
-    password: "",
-    password_comfirmation:"",
-    errMessage: "",
-  };
-  const [formValues, setFormValues] = useState(defaultFormValues);
+ 
   const navigate = useNavigate();
   const { state: userState, signUp } = useContext(userContext);
 
-  const handleChange = (e) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    signUp({
-      phone:formValues.phone,
-      email: formValues.email,
-      password: formValues.password,
-      password_comfirmation:formValues.password_comfirmation
-    });
-  };
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     signUp({
+//       phone:formValues.phone,
+//       email: formValues.email,
+//       password: formValues.password,
+//       password_comfirmation:formValues.password_comfirmation
+//     });
+//   };
+
+//   const formik = useFormik({
+//     initialValues: {
+//         phone: "",
+//         email: "",
+//         password: "",
+//         password_comfirmation:""
+//     },
+//     signInFormValidation,
+//     onSubmit: (value) => {
+//         console.log(value)
+//         // signUp({
+//         //     phone:formValues.phone,
+//         //     email: formValues.email,
+//         //     password: formValues.password,
+//         //     password_comfirmation:formValues.password_comfirmation
+//         //   });
+//     },
+//   });
+// Yup's validation schema
+const Schema = Yup.object().shape({
+    password: Yup.string().required("This field is required"),
+    password_comfirmation: Yup.string().when("password", {
+      is: val => (val && val.length > 0 ? true : false),
+      then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Both password need to be the same"
+      )
+    }),
+    phone: Yup.string().matches(/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/, 'Phone number is not valid').required('Phone number is required'),
+    email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
+  });
   return (
     <div className="mt-10">
-      <form onSubmit={handleSubmit}>
+        <Formik
+       initialValues={{
+        phone: "",
+        email: "",
+        password: "",
+        password_comfirmation:""
+       }}
+       validationSchema={Schema}
+       onSubmit={() => {
+           if (errors){
+               console.log(2)
+           }
+       }}
+     >
+       {({ values, errors, handleSubmit, handleChange, handleBlur }) => {
+      return (
+        <form onSubmit={handleSubmit}>
         <div className="flex flex-col mb-5">
           <label
             htmlFor="phone"
@@ -67,12 +103,14 @@ function SignUpForm({ linkSignIn }) {
               <i className="fas fa-at text-blue-500"></i>
             </div>
 
-            <input
+            <input 
               type="phone"
               name="phone"
               id="phone"
-              value={formValues.phone}
+              onBlur={handleBlur}
               onChange={handleChange}
+              value={values.phone}
+
               className="
                     text-sm
                     placeholder-gray-500
@@ -85,7 +123,12 @@ function SignUpForm({ linkSignIn }) {
                     focus:outline-none focus:border-blue-400
                   "
               placeholder="Enter your phone number"
+ 
             />
+             {errors.phone? (
+              <div>{errors.phone}</div>
+            ) : null}
+  
           </div>
         </div>
         <div className="flex flex-col mb-6">
@@ -112,12 +155,13 @@ function SignUpForm({ linkSignIn }) {
               <i className="fas fa-at text-blue-500"></i>
             </div>
 
-            <input
+            <input 
               type="email"
               name="email"
               id="email"
-              value={formValues.email}
+              onBlur={handleBlur}
               onChange={handleChange}
+              value={values.email}
               className="
                     text-sm
                     placeholder-gray-500
@@ -130,7 +174,11 @@ function SignUpForm({ linkSignIn }) {
                     focus:outline-none focus:border-blue-400
                   "
               placeholder="Enter your email"
+          
             />
+            {errors.email? (
+              <div>{errors.email}</div>
+            ) : null}
           </div>
         </div>
         <div className="flex flex-col mb-6">
@@ -159,12 +207,13 @@ function SignUpForm({ linkSignIn }) {
               </span>
             </div>
 
-            <input
+            <input 
               type="password"
               name="password"
               id="password"
-              value={formValues.password}
+              onBlur={handleBlur}
               onChange={handleChange}
+              value={values.password}
               className="
                     text-sm
                     placeholder-gray-500
@@ -177,7 +226,11 @@ function SignUpForm({ linkSignIn }) {
                     focus:outline-none focus:border-blue-400
                   "
               placeholder="Enter your password"
+       
             />
+            {errors.password? (
+              <div>{errors.password}</div>
+            ) : null}
           </div>
         </div>
         <div className="flex flex-col mb-6">
@@ -206,12 +259,13 @@ function SignUpForm({ linkSignIn }) {
               </span>
             </div>
 
-            <input
+            <input 
               type="Password"
               name="password_comfirmation"
               id="password_comfirmation"
-              value={formValues.password_comfirmation}
+              onBlur={handleBlur}
               onChange={handleChange}
+              value={values.password_comfirmation}
               className="
                     text-sm
                     placeholder-gray-500
@@ -225,6 +279,9 @@ function SignUpForm({ linkSignIn }) {
                   "
               placeholder="Enter your password_comfirmation"
             />
+             {errors.password_comfirmation? (
+              <div>{errors.password_comfirmation}</div>
+            ) : null}
           </div>
         </div>
         <div className="flex w-full">
@@ -264,7 +321,8 @@ function SignUpForm({ linkSignIn }) {
             </span>
           </button>
         </div>
-      </form>
+      </form>)}}
+      </Formik>
       <SignUpFormLink linkSignIn={linkSignIn} />
     </div>
   );

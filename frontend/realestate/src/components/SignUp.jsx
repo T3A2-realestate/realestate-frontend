@@ -9,7 +9,6 @@ import NavBar from './NavBar';
 // Redirect method
 import { useNavigate } from 'react-router-dom'
 
-
 // Login Components
 import FormContainer from './Form/FormContainer'
 import Form from './Form/Form'
