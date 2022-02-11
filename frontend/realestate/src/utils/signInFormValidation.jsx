@@ -1,15 +1,13 @@
 const validate = (values) => {
     const errors = {};
-  /* validating name */
-    if (!values.name) {
-      errors.name = "First name is required";
-    } else if (values.name.length < 6) {
-      errors.name = "Invalid name length, it has to be six characters or more";
-    } else if(values.name.length > 30){
-        errors.name = "Invalid name length, it has to be less than 30 characters";
+  /* validating phone */
+    if (!values.phone) {
+      errors.phone = "Phone number is required";
+    } else if (!/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/ig.test(values.phone)){
+        errors.phone = "Invalid phone number 😩"
     }
     else {
-      errors.name = "Nice name 😃";
+      errors.phone = "Nice number 😃";
     }
   
  
@@ -19,7 +17,9 @@ const validate = (values) => {
       errors.email = "Email address is required";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid email address";
-    }
+    } else {
+        errors.email = "Awesome email 😁";
+      }
   
   /* validating passwords */
     if (!values.password) {
