@@ -11,11 +11,11 @@ import { useNavigate } from 'react-router-dom'
 
 
 // Login Components
-import FormContainer from './Form/FormContainer'
-import Form from './Form/Form'
-import FormHeader from './Form/FormHeader'
-import FormSubheader from './Form/FormSubheader'
-import LogInForm from './Form/LogInForm'
+import FormContainer from './LogInForm/FormContainer'
+import Form from './LogInForm/Form'
+import FormHeader from './LogInForm/FormHeader'
+import FormSubheader from './LogInForm/FormSubheader'
+import LogInForm from './LogInForm/LogInForm'
 
 function Login() {
 // login form text
