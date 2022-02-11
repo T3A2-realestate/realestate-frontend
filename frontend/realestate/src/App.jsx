@@ -1,6 +1,7 @@
 import React, { useContext,useEffect } from 'react';
 //Components
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 import NarBar from './components/NavBar'
 
 // Loading
@@ -31,6 +32,8 @@ function App() {
     <NarBar is_loggedIn={is_loggedIn}/>
       <Routes>
         <Route exact path='/' element={<Login/>}  />
+        <Route exact path='/Sign_In' element={<Login/>}  />
+        <Route exact path='/sign_up' element={<SignUp/>}  />
 
       </Routes>
 

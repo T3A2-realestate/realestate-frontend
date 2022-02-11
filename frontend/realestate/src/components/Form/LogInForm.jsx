@@ -1,39 +1,45 @@
-import React, {useState,useContext} from 'react'
+import React, { useState, useContext } from "react";
 // Context
-import {userContext} from'../../utils/userContext'
+import { userContext } from "../../utils/userContext";
 
 // Redirect method
-import { useNavigate } from 'react-router-dom'
-function LogInForm(props) {
+import { useNavigate } from "react-router-dom";
+// sub-component
+import FormLink from "./FormLink";
+
+function LogInForm({ linkSignUp }) {
   const defaultFormValues = {
-    email: '',
-    password: '',
-    errMessage:''
-}
-const [formValues, setFormValues] = useState(defaultFormValues);
-const navigate = useNavigate()
-const {state: userState,signIn} = useContext(userContext)
+    email: "",
+    password: "",
+    errMessage: "",
+  };
+  const [formValues, setFormValues] = useState(defaultFormValues);
+  const navigate = useNavigate();
+  const { state: userState, signIn } = useContext(userContext);
 
-const handleChange = (e) => {
-  setFormValues({
+  const handleChange = (e) => {
+    setFormValues({
       ...formValues,
-      [e.target.name]: e.target.value
-  })
-}
+      [e.target.name]: e.target.value,
+    });
+  };
 
-const handleSubmit = async (event) => {
-  event.preventDefault()
-  signIn({
-    email: formValues.email,
-    password:formValues.password
-  })
-  
-  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    signIn({
+      email: formValues.email,
+      password: formValues.password,
+    });
+  };
+
   return (
     <div className="mt-10">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col mb-5">
-          <label htmlFor="email" className="mb-1 text-xs tracking-wide text-gray-600">
+          <label
+            htmlFor="email"
+            className="mb-1 text-xs tracking-wide text-gray-600"
+          >
             E-Mail Address:
           </label>
           <div className="relative">
@@ -160,6 +166,7 @@ const handleSubmit = async (event) => {
           </button>
         </div>
       </form>
+      <FormLink linkSignUp={linkSignUp} />
     </div>
   );
 }

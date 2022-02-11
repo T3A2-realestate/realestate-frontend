@@ -15,15 +15,16 @@ import FormContainer from './Form/FormContainer'
 import Form from './Form/Form'
 import FormHeader from './Form/FormHeader'
 import FormSubheader from './Form/FormSubheader'
-import LogInForm from './Form/LogInForm'
+import SignUpForm from './Form/SignUpForm'
 
-function Login() {
-// login form text
-const  header = 'Welcome Back'
-const  subheader = 'Enter your credentials to access your account'
-const  linkSignUp = {
-  status:'don\'t',
-  register:'Register'
+
+function SignUp() {
+// Sign up form text
+const  header = 'Welcome'
+const  subheader = 'Enter credentials to create your account'
+const  linkSignIn = {
+  status:'already',
+  LogIn:'Log In'
 }
 
 const navigate = useNavigate()
@@ -37,11 +38,11 @@ const {state: userState,signIn} = useContext(userContext)
      <FormHeader text={header} />
      <FormSubheader text={subheader} />
      
-     <LogInForm linkSignUp={linkSignUp}/>
+     <SignUpForm linkSignIn={linkSignIn}/>
      </Form>
      </FormContainer>
  
     );
   }
   
-  export default Login;
+  export default SignUp;

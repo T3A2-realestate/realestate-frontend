@@ -121,39 +121,48 @@ function NavBar({ is_loggedIn }) {
               id="mobile-menu"
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="#"
-                  className="hover:bg-gray-500 text-black block px-3 py-2 rounded-md text-base font-large"
+                <Link
+                  to="/"
+                  className=" hover:bg-gray-500 text-black block px-3 py-2 rounded-md text-base font-large"
                 >
-                  Dashboard
-                </a>
-                <a
-                  href="#"
+                  Home
+                </Link>
+                <Link
+                  to="/listings"
                   className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
                 >
-                  Team
-                </a>
+                  Listings
+                </Link>
 
-                <a
-                  href="#"
+                <Link
+                  to="/sell"
                   className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
                 >
-                  Projects
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
-                >
-                  Calendar
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
-                >
-                  Reports
-                </a>
+                  Sell Property
+                </Link>
+                {is_loggedIn ? (
+                  <Link
+                    to="/sign_Out"
+                    className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
+                  >
+                    Sign Out
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      to="/log_in"
+                      className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
+                    >
+                      Log In
+                    </Link>
+                    <Link
+                      to="/sign_up"
+                      className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           )}
