@@ -51,17 +51,3 @@ export const updateUser = async (user, id) => {
     return error.response;
   });
 };
-// making a get request to fetch a specific user data from backend
-export const getUser = async (dispatch) => {
-  await API.get("api/auth/checkAuth")
-    .then((res) => {
-      console.log(res);
-      dispatch({
-        type: "setLoggedInUser",
-        payload: res.data.user,
-      });
-    })
-    .catch((error) => {
-      return error.response;
-    });
-};

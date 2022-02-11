@@ -32,8 +32,8 @@ const handleSubmit = async (event) => {
   return (
     <div className="mt-10">
       <form onSubmit={handleSubmit}>
-        <div class="flex flex-col mb-5">
-          <label for="email" className="mb-1 text-xs tracking-wide text-gray-600">
+        <div className="flex flex-col mb-5">
+          <label htmlFor="email" className="mb-1 text-xs tracking-wide text-gray-600">
             E-Mail Address:
           </label>
           <div className="relative">
@@ -148,9 +148,9 @@ const handleSubmit = async (event) => {
               <svg
                 className="h-6 w-6"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >

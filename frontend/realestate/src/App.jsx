@@ -1,7 +1,7 @@
-import React, { useContext, createContext,useEffect } from 'react';
+import React, { useContext,useEffect } from 'react';
 //Components
 import Login from './components/Login';
-
+import NarBar from './components/NavBar'
 
 // Loading
 import Loading from './pages/Loading'
@@ -15,15 +15,11 @@ import {userContext} from'./utils/userContext'
 
 function App() {
   // destructure the returning result of useContext to user state and the setter.
-  const {state: currentUserState, getUserData} = useContext(userContext)
+  const {state: currentUserState} = useContext(userContext)
   // try to identify if the user is logged in and have user data in local storage.
-  const unloadedUser = (localStorage.getItem('token') && !currentUserState.user) 
-  // if the token exists in the local storage and yet the user data doesn't then the
- // it will try to use axios to send to request 
-  if (unloadedUser){
-    fetchUser()
-  }
-
+  const is_loggedIn = localStorage.getItem('token') && !currentUserState.user
+ 
+  console.log(is_loggedIn)
   // once the user state is changed then it will be rerendered
   useEffect(() => {
   },[])
@@ -32,14 +28,12 @@ function App() {
   return (
     <>
 
-    {unloadedUser ?
-      <Loading/>
-      :
+    <NarBar is_loggedIn={is_loggedIn}/>
       <Routes>
         <Route exact path='/' element={<Login/>}  />
 
       </Routes>
-    }
+
 
     </>
   );
