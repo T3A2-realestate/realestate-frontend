@@ -7,7 +7,7 @@ export const API = axios.create({
 	// I set the time out for request to be 10 seconds
 	timeout : 10000,
     // I set the request can have cookies
-    withCredentials : true
+    'Access-Control-Allow-Credentials':true,
 })
 
 // assingning to request headers authorization the bearer and getting the token 
@@ -19,6 +19,7 @@ API.interceptors.request.use((config) => {
   // If there is a AuthorizationToken exists in the localStorage, then it will be assign to request header then the server knows 
   // user is logged in.
   config.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}` || '';
+  config.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
 	return config;
   }, (err) => {
 	if (err.response) { 
@@ -44,6 +45,7 @@ API.interceptors.request.use((config) => {
   API.interceptors.response.use(
 	  
     (response) => {
+      Access-Control-Allow-Origin
 		// Check if there is authToken inside the response
 		let token = response.data?.authToken
 		// If the status code is 200 and the authToken exists then the promise is resolve
