@@ -19,7 +19,7 @@ import LogInForm from './Form/LogInForm'
 
 function Login() {
 // login form text
-const  header = 'Welcome Back'
+const  header = 'Welcome Back 🚀'
 const  subheader = 'Enter your credentials to access your account'
 const  linkSignUp = {
   status:'don\'t',

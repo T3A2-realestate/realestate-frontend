@@ -203,7 +203,7 @@ function SignUpForm({ linkSignIn }) {
             </div>
 
             <input
-              type="password_comfirmation"
+              type="Password"
               name="password_comfirmation"
               id="password_comfirmation"
               value={formValues.password_comfirmation}

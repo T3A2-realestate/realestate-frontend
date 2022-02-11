@@ -20,7 +20,7 @@ import SignUpForm from './Form/SignUpForm'
 
 function SignUp() {
 // Sign up form text
-const  header = 'Welcome'
+const  header = 'Welcome 👏'
 const  subheader = 'Enter credentials to create your account'
 const  linkSignIn = {
   status:'already',
