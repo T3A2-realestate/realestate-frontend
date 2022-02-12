@@ -24,12 +24,13 @@ const  linkSignUp = {
   status:'don\'t',
   register:'Register'
 }
-
-const {state: currentUserState} = useContext(userContext)
+const { state: currentUserState } = useContext(userContext);
 const navigate = useNavigate();
-
+const is_loggedIn =
+    !!localStorage.getItem("token") && !!currentUserState.token;
+    console.log(is_loggedIn)
   useEffect(() => {
-    if (currentUserState.token != null) {
+    if (is_loggedIn) {
       navigate('/home')
     }
   },[currentUserState])

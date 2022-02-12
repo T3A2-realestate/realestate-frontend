@@ -11,11 +11,11 @@ function NavBar() {
     // destructure the returning result of useContext to user state and the setter.
     const { state: currentUserState,dispatch } = useContext(userContext);
     // try to identify if the user is logged in and have user data in local storage.
-    const is_loggedIn = !!localStorage.getItem("token") && !!currentUserState.token;
+    const is_loggedIn = !!localStorage.getItem("token") && !!currentUserState.token
 
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-   console.log(is_loggedIn)
+ 
   const handleSignOut = () => {
     dispatch({ type: "setLogOut" });
     localStorage.clear()

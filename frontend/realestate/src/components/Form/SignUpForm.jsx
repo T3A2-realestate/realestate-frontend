@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import SignUpFormLink from "./SignUpFormLink";
 
 // Form validation
-import { Formik } from "formik";
+import { ErrorMessage ,Formik } from "formik";
 import * as Yup from "yup";
 // toastify
 import { ToastContainer, toast } from "react-toastify";
@@ -63,7 +63,7 @@ function SignUpForm({ linkSignIn }) {
         onSubmit={(values) => {
           signUp(values);
           if (!currentUserState.token) {
-            toast("Wow Somthing went wrong !");
+            toast("The user is already exist!");
           }
         }}
       >

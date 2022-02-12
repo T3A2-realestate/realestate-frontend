@@ -7,12 +7,15 @@ export const createProperty = async (property, dispatch) => {
     method: "post",
     url: `${import.meta.env.VITE_APP_API_ENDPOINT}/api/properties`,
     headers: { "Content-Type": "application/json" },
-    data: {
+    data:{
       ...property,
-      "user_id":1
-    },
+      'status' : parseInt(property.status),
+      'category' : parseInt(property.category),
+      'phone' : parseInt(property.phone)
+    }
   })
     .then((res) => {
+      console.log(res)
       return res.data
     })
     .catch((error) => {

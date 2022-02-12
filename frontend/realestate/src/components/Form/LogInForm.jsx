@@ -34,7 +34,7 @@ function LogInForm({ linkSignUp }) {
       email: formValues.email,
       password: formValues.password,
     });
-    if (!currentUserState.token) {
+    if (!userState.token) {
       toast("Wow Somthing went wrong !");
     }
   };

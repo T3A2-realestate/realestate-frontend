@@ -17,6 +17,7 @@ export const signUpUser = async (user, dispatch) => {
     },
   })
     .then((res) => {
+      console.log(res)
       localStorage.setItem("token", JSON.stringify(res.headers.authorization));
       dispatch({
         type: "setLoggedInUser",
