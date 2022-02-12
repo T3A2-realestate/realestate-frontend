@@ -21,7 +21,7 @@ export const createProperty = async (property, dispatch) => {
 };
 
 // Get all properties
-export const getAllProperty = async () => {
+export const getAllProperties = async () => {
   await axios({
     method: "get",
     url: `${import.meta.env.VITE_APP_API_ENDPOINT}/api/properties`,
