@@ -44,45 +44,5 @@ API.interceptors.request.use((config) => {
 	return Promise.reject(err);
   });
 
-//   API.interceptors.response.use(
-	  
-//     (response) => {
-//       Access-Control-Allow-Origin
-// 		// Check if there is authToken inside the response
-// 		let token = response.data?.authToken
-// 		// If the status code is 200 and the authToken exists then the promise is resolve
-//         if (response.status === 200 && token) {
-// 		// and set the token in localStorage and the token will expires in one hour
-// 			localStorage.setItem('authToken', token, { expires: 1000 * 60 * 60 })
-//             return Promise.resolve(response);
-//         } else {
-// 		// Otherwise throw an error
-//             return Promise.reject(response);
-//         }
-//     },
-//     // dealing with errors
-//     (error) => {
-//         if (error.response.status) {
-//             switch (error.response.status) {
-//                 // case user not logged in yet
-//                 case 401:
-//                    // todo with the not logged in situation
-//                     break;
-
-//                 // token expired
-//                 case 403:
-                     
-//                     break;
-
-//                 // 404
-//                 case 404:
-                   
-//                 default:
-//                     break;
-//             }
-//             return Promise.reject(error.response);
-//         }
-//     }
-// );
 
 export default API

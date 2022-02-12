@@ -6,7 +6,7 @@ export const signUpUser = async (user, dispatch) => {
   // asynchronously post new user data request to specific end point
   await axios({
     method: "post",
-    url: "http://localhost:3000/users",
+    url: `${import.meta.env.VITE_APP_API_ENDPOINT}/users`,
     headers: { "Content-Type": "application/json" },
     data: {
       "user": {
@@ -34,7 +34,7 @@ export const signInUser = async (user, dispatch) => {
   // asynchronously post new user data request to specific end point
   await axios({
     method: "post",
-    url: "http://localhost:3000/users/sign_in",
+    url: `${import.meta.env.VITE_APP_API_ENDPOINT}/users/sign_in`,
     headers: { "Content-Type": "application/json" },
     data: { "user": { "email": `${user.email}`, "password": `${user.password}` } },
   })
@@ -51,9 +51,3 @@ export const signInUser = async (user, dispatch) => {
     });
 };
 
-// making a update user request for specific user to backend
-export const updateUser = async (user, id) => {
-  await API.put(`/user/${id}`, user).catch((error) => {
-    return error.response;
-  });
-};

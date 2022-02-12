@@ -1,35 +1,64 @@
-import API from "../utils/api"
+import axios from "axios";
 
 
-// making a get request to get a properties list data
-export const allProperties = async () => {
-    // use error handling
-    try {
-        const res = await API.get('api/properties');
-        console.log(res.data);
-        return res.data;
-      } catch (error) {
-          return error.response;
-    }
-}
-// making a get request to get a specific property data
-export const singleProperty = async (id) => {
-     // use error handling
-     try {
-        const res = await API.get(`api/properties/${id}`);
-            console.log(res.data)
-          } catch (error) {
-            return error.response;
-          }
-}
-// making a get request to get a search result data with same title
-export const searchTitle = async (title) => {
-     // use error handling
-     try {
-        const res = await API.get(`api/properties/title/search?title=${title}`);
-            console.log(res.data)
-          } catch (error) {
-            return error.response;
-          }
-}
+// making a post request to create a property
+export const createProperty = async (property, dispatch) => {
+  await axios({
+    method: "post",
+    url: `${import.meta.env.VITE_APP_API_ENDPOINT}/api/properties`,
+    headers: { "Content-Type": "application/json" },
+    data: {
+      ...property,
+      "user_id":1
+    },
+  })
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
 
+// Get all properties
+export const getAllProperty = async () => {
+  await axios({
+    method: "get",
+    url: `${import.meta.env.VITE_APP_API_ENDPOINT}/api/properties`,
+    headers: { "Content-Type": "application/json" }
+  })
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+// Get one properties
+export const getOneProperty = async (id) => {
+  await axios({
+    method: "get",
+    url: `${import.meta.env.VITE_APP_API_ENDPOINT}/api/properties/${id}`,
+    headers: { "Content-Type": "application/json" }
+  })
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+// search suburb
+export const search = async (term) => {
+  await axios({
+    method: "get",
+    url: `${import.meta.env.VITE_APP_API_ENDPOINT}/api/property/search`,
+    headers: { "Content-Type": "application/json" }
+  })
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
