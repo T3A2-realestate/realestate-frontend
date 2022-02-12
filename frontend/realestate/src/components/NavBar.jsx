@@ -1,10 +1,22 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+//Context
+import { userContext } from "../utils/userContext";
+// styling component
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 
 function NavBar({ is_loggedIn }) {
+  const { state: currentUserState, dispatch } = useContext(userContext);
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleSignOut = () => {
+    dispatch({ type: "setLogOut" });
+    navigate('/')
+  };
+
   return (
     <div>
       <nav className="bg-blue-300">
@@ -78,12 +90,10 @@ function NavBar({ is_loggedIn }) {
                     Sell Property
                   </Link>
                   {is_loggedIn ? (
-                    <Link
-                      to="/sign_Out"
-                      className=" hover:bg-gray-600 text-black px-3 py-2 rounded-md text-lg font-medium"
-                    >
+                    <Nav.Link onClick={handleSignOut}>
+                      <i className="hover:bg-gray-600 text-black px-3 py-2 rounded-md text-lg font-medium"></i>
                       Sign Out
-                    </Link>
+                    </Nav.Link>
                   ) : (
                     <>
                       <Link
@@ -141,12 +151,10 @@ function NavBar({ is_loggedIn }) {
                   Sell Property
                 </Link>
                 {is_loggedIn ? (
-                  <Link
-                    to="/sign_Out"
-                    className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
-                  >
+                  <Nav.Link onClick={handleSignOut}>
+                    <i className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"></i>
                     Sign Out
-                  </Link>
+                  </Nav.Link>
                 ) : (
                   <>
                     <Link

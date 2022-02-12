@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 // sub-component
 import FormLink from "./FormLink";
 
+import axios from 'axios'
+
 function LogInForm({ linkSignUp }) {
   const defaultFormValues = {
     email: "",
@@ -30,7 +32,9 @@ function LogInForm({ linkSignUp }) {
       email: formValues.email,
       password: formValues.password,
     });
-  };
+
+    }
+
 
   return (
     <div className="mt-10">

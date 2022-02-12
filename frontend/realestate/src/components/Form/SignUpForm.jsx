@@ -71,9 +71,7 @@ const Schema = Yup.object().shape({
        }}
        validationSchema={Schema}
        onSubmit={() => {
-           if (errors){
-               console.log(2)
-           }
+           
        }}
      >
        {({ values, errors, handleSubmit, handleChange, handleBlur }) => {

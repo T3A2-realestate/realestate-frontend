@@ -3,7 +3,7 @@ import reducer from "./reducer";
 import { signUpUser, signInUser} from "../services/authServices";
 
 const userState = {
-  user: "",
+  token: "",
   userLoaded: false,
 };
 

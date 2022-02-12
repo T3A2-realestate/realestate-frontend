@@ -7,8 +7,9 @@ export const API = axios.create({
 	// I set the time out for request to be 10 seconds
 	timeout : 10000,
     // I set the request can have cookies
-    'Access-Control-Allow-Credentials':true,
+    'Access-Control-Allow-Credentials':true
 })
+
 
 // assingning to request headers authorization the bearer and getting the token 
 // from local storage after user logged in to 
@@ -20,6 +21,7 @@ API.interceptors.request.use((config) => {
   // user is logged in.
   config.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}` || '';
   config.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
+  config.headers.common['Content-Type'] = 'application/json;charset=UTF-8';
 	return config;
   }, (err) => {
 	if (err.response) { 
@@ -42,45 +44,45 @@ API.interceptors.request.use((config) => {
 	return Promise.reject(err);
   });
 
-  API.interceptors.response.use(
+//   API.interceptors.response.use(
 	  
-    (response) => {
-      Access-Control-Allow-Origin
-		// Check if there is authToken inside the response
-		let token = response.data?.authToken
-		// If the status code is 200 and the authToken exists then the promise is resolve
-        if (response.status === 200 && token) {
-		// and set the token in localStorage and the token will expires in one hour
-			localStorage.setItem('authToken', token, { expires: 1000 * 60 * 60 })
-            return Promise.resolve(response);
-        } else {
-		// Otherwise throw an error
-            return Promise.reject(response);
-        }
-    },
-    // dealing with errors
-    (error) => {
-        if (error.response.status) {
-            switch (error.response.status) {
-                // case user not logged in yet
-                case 401:
-                   // todo with the not logged in situation
-                    break;
+//     (response) => {
+//       Access-Control-Allow-Origin
+// 		// Check if there is authToken inside the response
+// 		let token = response.data?.authToken
+// 		// If the status code is 200 and the authToken exists then the promise is resolve
+//         if (response.status === 200 && token) {
+// 		// and set the token in localStorage and the token will expires in one hour
+// 			localStorage.setItem('authToken', token, { expires: 1000 * 60 * 60 })
+//             return Promise.resolve(response);
+//         } else {
+// 		// Otherwise throw an error
+//             return Promise.reject(response);
+//         }
+//     },
+//     // dealing with errors
+//     (error) => {
+//         if (error.response.status) {
+//             switch (error.response.status) {
+//                 // case user not logged in yet
+//                 case 401:
+//                    // todo with the not logged in situation
+//                     break;
 
-                // token expired
-                case 403:
+//                 // token expired
+//                 case 403:
                      
-                    break;
+//                     break;
 
-                // 404
-                case 404:
+//                 // 404
+//                 case 404:
                    
-                default:
-                    break;
-            }
-            return Promise.reject(error.response);
-        }
-    }
-);
+//                 default:
+//                     break;
+//             }
+//             return Promise.reject(error.response);
+//         }
+//     }
+// );
 
 export default API
