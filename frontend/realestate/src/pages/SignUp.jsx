@@ -25,10 +25,15 @@ const  linkSignIn = {
   LogIn:'Log In'
 }
 
-const navigate = useNavigate()
-const {state: userState,signIn} = useContext(userContext)
 
+const {state: currentUserState} = useContext(userContext)
+const navigate = useNavigate();
 
+  useEffect(() => {
+    if (currentUserState.token != null) {
+      navigate('/home')
+    }
+  },[currentUserState])
     return (
      
      <FormContainer>

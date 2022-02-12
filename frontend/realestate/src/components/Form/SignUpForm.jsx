@@ -15,7 +15,7 @@ import * as Yup from "yup";
 
 function SignUpForm({ linkSignIn }) {
  
-  const {state: currentUserState} = useContext(userContext)
+  const {state: currentUserState,signUp} = useContext(userContext)
   const navigate = useNavigate();
   
     useEffect(() => {
@@ -33,22 +33,22 @@ const Schema = Yup.object().shape({
         "Both password need to be the same"
       )
     }),
-    phone: Yup.string().matches(/^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/, 'Phone number is not valid').required('Phone number is required'),
+    name: Yup.string().max(255).required('Name is required'),
     email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
   });
   return (
     <div className="mt-10">
         <Formik
        initialValues={{
-        phone: "",
+        name: "",
         email: "",
         password: "",
         password_comfirmation:""
        }}
        validationSchema={Schema}
-       onSubmit={() => {
-           
-       }}
+       onSubmit={(values) => {
+        signUp(values)
+    }}
      >
        {({ values, errors, handleSubmit, handleChange, handleBlur }) => {
       return (
@@ -58,7 +58,7 @@ const Schema = Yup.object().shape({
             htmlFor="phone"
             className="mb-1 text-xs tracking-wide text-gray-600"
           >
-            Phone Number:
+            Name:
           </label>
           <div className="relative">
             <div
@@ -78,12 +78,12 @@ const Schema = Yup.object().shape({
             </div>
 
             <input 
-              type="phone"
-              name="phone"
-              id="phone"
+              type="name"
+              name="name"
+              id="name"
               onBlur={handleBlur}
               onChange={handleChange}
-              value={values.phone}
+              value={values.name}
 
               className="
                     text-sm
@@ -99,8 +99,8 @@ const Schema = Yup.object().shape({
               placeholder="Enter your phone number"
  
             />
-             {errors.phone? (
-              <div>{errors.phone}</div>
+             {errors.name? (
+              <div>{errors.name}</div>
             ) : null}
   
           </div>

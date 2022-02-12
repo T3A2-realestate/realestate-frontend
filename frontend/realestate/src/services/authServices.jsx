@@ -5,7 +5,7 @@ export const signUpUser = async (user, dispatch) => {
   // asynchronously post new user data request to specific end point
   await axios({
     method: "post",
-    url: "http://localhost:3000/users/sign_in",
+    url: "http://localhost:3000/users",
     headers: { "Content-Type": "application/json" },
     data: {
       "user": {
