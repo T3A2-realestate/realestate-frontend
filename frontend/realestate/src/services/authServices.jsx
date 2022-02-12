@@ -1,9 +1,4 @@
 import axios from "axios";
-// fetch the current token
-if (!!localStorage.getItem("token")) {
-  // token = JSON.parse(localStorage.getItem("token"));
-  console.log("1" + localStorage.getItem("token"));
-}
 
 // making a post request to create a user
 export const signUpUser = async (user, dispatch) => {
@@ -22,7 +17,7 @@ export const signUpUser = async (user, dispatch) => {
   })
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.headers.authorization));
-      console.log("token: " + token);
+      console.log("token: " + res.headers.authorization);
       dispatch({
         type: "setLoggedInUser",
         payload: res.headers.authorization,
@@ -44,8 +39,10 @@ export const signInUser = async (user, dispatch) => {
   })
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.headers.authorization));
+      console.log(res.headers.authorization)
       dispatch({
-        type: "setLoggedInUser"
+        type: "setLoggedInUser",
+        payload:res.headers.authorization
       });
     })
     .catch((error) => {

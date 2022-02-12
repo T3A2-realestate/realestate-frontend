@@ -9,7 +9,6 @@ import NavBar from '../components/NavBar';
 // Redirect method
 import { useNavigate } from 'react-router-dom'
 
-
 // Login Components
 import FormContainer from '../components/Form/FormContainer'
 import Form from '../components/Form/Form'
@@ -26,8 +25,14 @@ const  linkSignUp = {
   register:'Register'
 }
 
-const navigate = useNavigate()
-const {state: userState,signIn} = useContext(userContext)
+const {state: currentUserState} = useContext(userContext)
+const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUserState.token != null) {
+      navigate('/home')
+    }
+  },[currentUserState])
 
 
     return (

@@ -20,17 +20,15 @@ function App() {
   // destructure the returning result of useContext to user state and the setter.
   const { state: currentUserState } = useContext(userContext);
   // try to identify if the user is logged in and have user data in local storage.
-  const is_loggedIn = localStorage.getItem("token") && currentUserState.token;
+  const is_loggedIn = !!localStorage.getItem("token") && !!currentUserState.token
 
-  console.log(is_loggedIn);
-  console.log(localStorage.getItem("token"));
-  console.log(!currentUserState.token);
   // once the user state is changed then it will be rerendered
-  useEffect(() => {}, []);
+  useEffect(() => {console.log(currentUserState)
+    console.log(is_loggedIn)}, [currentUserState]);
 
   return (
     <>
-      <NarBar is_loggedIn={is_loggedIn} />
+      <NarBar/>
       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route exact path="/sign_In" element={<Login />} />

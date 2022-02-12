@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 // Context
 import { userContext } from "../../utils/userContext";
 
@@ -15,39 +15,15 @@ import * as Yup from "yup";
 
 function SignUpForm({ linkSignIn }) {
  
+  const {state: currentUserState} = useContext(userContext)
   const navigate = useNavigate();
-  const { state: userState, signUp } = useContext(userContext);
+  
+    useEffect(() => {
+      if (currentUserState.token != null) {
+        navigate('/home')
+      }
+    },[currentUserState])
 
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     signUp({
-//       phone:formValues.phone,
-//       email: formValues.email,
-//       password: formValues.password,
-//       password_comfirmation:formValues.password_comfirmation
-//     });
-//   };
-
-//   const formik = useFormik({
-//     initialValues: {
-//         phone: "",
-//         email: "",
-//         password: "",
-//         password_comfirmation:""
-//     },
-//     signInFormValidation,
-//     onSubmit: (value) => {
-//         console.log(value)
-//         // signUp({
-//         //     phone:formValues.phone,
-//         //     email: formValues.email,
-//         //     password: formValues.password,
-//         //     password_comfirmation:formValues.password_comfirmation
-//         //   });
-//     },
-//   });
-// Yup's validation schema
 const Schema = Yup.object().shape({
     password: Yup.string().required("This field is required"),
     password_comfirmation: Yup.string().when("password", {

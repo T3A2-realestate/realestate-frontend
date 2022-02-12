@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 // sub-component
 import FormLink from "./FormLink";
 
-import axios from 'axios'
-
 function LogInForm({ linkSignUp }) {
   const defaultFormValues = {
     email: "",

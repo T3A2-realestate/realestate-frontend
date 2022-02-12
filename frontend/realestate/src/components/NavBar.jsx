@@ -7,11 +7,15 @@ import { userContext } from "../utils/userContext";
 // styling component
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 
-function NavBar({ is_loggedIn }) {
-  const { state: currentUserState, dispatch } = useContext(userContext);
+function NavBar() {
+    // destructure the returning result of useContext to user state and the setter.
+    const { state: currentUserState,dispatch } = useContext(userContext);
+    // try to identify if the user is logged in and have user data in local storage.
+    const is_loggedIn = !!localStorage.getItem("token") && !!currentUserState.token;
+
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
+   console.log(is_loggedIn)
   const handleSignOut = () => {
     dispatch({ type: "setLogOut" });
     localStorage.clear()
@@ -91,8 +95,7 @@ function NavBar({ is_loggedIn }) {
                     Sell Property
                   </Link>
                   {is_loggedIn ? (
-                    <Nav.Link onClick={handleSignOut}>
-                      <i className="hover:bg-gray-600 text-black px-3 py-2 rounded-md text-lg font-medium"></i>
+                    <Nav.Link onClick={handleSignOut} className="hover:bg-gray-600 text-black px-3 py-2 rounded-md text-lg font-medium">
                       Sign Out
                     </Nav.Link>
                   ) : (
@@ -152,8 +155,7 @@ function NavBar({ is_loggedIn }) {
                   Sell Property
                 </Link>
                 {is_loggedIn ? (
-                  <Nav.Link onClick={handleSignOut}>
-                    <i className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"></i>
+                  <Nav.Link onClick={handleSignOut} className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large">
                     Sign Out
                   </Nav.Link>
                 ) : (

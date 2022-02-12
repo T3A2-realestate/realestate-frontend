@@ -3,8 +3,7 @@ import reducer from "./reducer";
 import { signUpUser, signInUser} from "../services/authServices";
 
 const userState = {
-  token: "",
-  userLoaded: false,
+  token: null
 };
 
 export const userContext= createContext({
