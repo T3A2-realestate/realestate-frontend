@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 //Components
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import NarBar from "./components/NavBar";
 
 // Loading
@@ -11,6 +11,10 @@ import PrivateRoutes from "./routers/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 //Context
 import { userContext } from "./utils/userContext";
+//Page
+import Home from './pages/Home'
+import Listing from './pages/Listing'
+import Sell from './pages/Sell'
 
 function App() {
   // destructure the returning result of useContext to user state and the setter.
@@ -31,6 +35,9 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route exact path="/sign_In" element={<Login />} />
         <Route exact path="/sign_up" element={<SignUp />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/listing" element={<Listing />} />
+        <Route exact path="/sell" element={<Sell />} />
       </Routes>
     </>
   );

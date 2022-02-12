@@ -14,6 +14,7 @@ function NavBar({ is_loggedIn }) {
 
   const handleSignOut = () => {
     dispatch({ type: "setLogOut" });
+    localStorage.clear()
     navigate('/')
   };
 
@@ -70,17 +71,17 @@ function NavBar({ is_loggedIn }) {
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <Link
-                    to="/"
+                    to="/home"
                     className=" hover:bg-gray-900 text-black px-3 py-2 rounded-md text-lg font-medium"
                   >
                     Home
                   </Link>
 
                   <Link
-                    to="/listings"
+                    to="/listing"
                     className=" hover:bg-gray-600 text-black px-3 py-2 rounded-md text-lg font-medium"
                   >
-                    Listings
+                    Listing
                   </Link>
 
                   <Link
@@ -132,16 +133,16 @@ function NavBar({ is_loggedIn }) {
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <Link
-                  to="/"
+                  to="/home"
                   className=" hover:bg-gray-500 text-black block px-3 py-2 rounded-md text-base font-large"
                 >
                   Home
                 </Link>
                 <Link
-                  to="/listings"
+                  to="/listing"
                   className="text-gray-600 hover:bg-gray-500 hover:text-black block px-3 py-2 rounded-md text-base font-large"
                 >
-                  Listings
+                  Listing
                 </Link>
 
                 <Link

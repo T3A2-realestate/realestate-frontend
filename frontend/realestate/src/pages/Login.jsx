@@ -4,18 +4,18 @@ import { useContext, useEffect } from 'react';
 // Context
 import {userContext} from'../utils/userContext'
 // Components
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 
 // Redirect method
 import { useNavigate } from 'react-router-dom'
 
 
 // Login Components
-import FormContainer from './Form/FormContainer'
-import Form from './Form/Form'
-import FormHeader from './Form/FormHeader'
-import FormSubheader from './Form/FormSubheader'
-import LogInForm from './Form/LogInForm'
+import FormContainer from '../components/Form/FormContainer'
+import Form from '../components/Form/Form'
+import FormHeader from '../components/Form/FormHeader'
+import FormSubheader from '../components/Form/FormSubheader'
+import LogInForm from '../components/Form/LogInForm'
 
 function Login() {
 // login form text
