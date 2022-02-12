@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 // sub-component
 import FormLink from "./FormLink";
 
+// toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function LogInForm({ linkSignUp }) {
   const defaultFormValues = {
     email: "",
@@ -30,12 +34,23 @@ function LogInForm({ linkSignUp }) {
       email: formValues.email,
       password: formValues.password,
     });
-
+    if (!currentUserState.token) {
+      toast("Wow Somthing went wrong !");
     }
-
+  };
 
   return (
     <div className="mt-10">
+      <ToastContainer
+        position="top-left"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col mb-5">
           <label

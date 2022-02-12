@@ -11,58 +11,75 @@ import SignUpFormLink from "./SignUpFormLink";
 // Form validation
 import { Formik } from "formik";
 import * as Yup from "yup";
-
+// toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignUpForm({ linkSignIn }) {
- 
-  const {state: currentUserState,signUp} = useContext(userContext)
+  const { state: currentUserState, signUp } = useContext(userContext);
   const navigate = useNavigate();
-  
-    useEffect(() => {
-      if (currentUserState.token != null) {
-        navigate('/home')
-      }
-    },[currentUserState])
 
-const Schema = Yup.object().shape({
+  useEffect(() => {
+    if (currentUserState.token != null) {
+      navigate("/home");
+    }
+  }, [currentUserState]);
+
+  const Schema = Yup.object().shape({
     password: Yup.string().required("This field is required"),
     password_comfirmation: Yup.string().when("password", {
-      is: val => (val && val.length > 0 ? true : false),
+      is: (val) => (val && val.length > 0 ? true : false),
       then: Yup.string().oneOf(
         [Yup.ref("password")],
         "Both password need to be the same"
-      )
+      ),
     }),
-    name: Yup.string().max(255).required('Name is required'),
-    email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
+    name: Yup.string().max(255).required("Name is required"),
+    email: Yup.string()
+      .email("Must be a valid email")
+      .max(255)
+      .required("Email is required"),
   });
   return (
     <div className="mt-10">
-        <Formik
-       initialValues={{
-        name: "",
-        email: "",
-        password: "",
-        password_comfirmation:""
-       }}
-       validationSchema={Schema}
-       onSubmit={(values) => {
-        signUp(values)
-    }}
-     >
-       {({ values, errors, handleSubmit, handleChange, handleBlur }) => {
-      return (
-        <form onSubmit={handleSubmit}>
-        <div className="flex flex-col mb-5">
-          <label
-            htmlFor="phone"
-            className="mb-1 text-xs tracking-wide text-gray-600"
-          >
-            Name:
-          </label>
-          <div className="relative">
-            <div
-              className="
+      <ToastContainer
+        position="top-left"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          password: "",
+          password_comfirmation: "",
+        }}
+        validationSchema={Schema}
+        onSubmit={(values) => {
+          signUp(values);
+          if (!currentUserState.token) {
+            toast("Wow Somthing went wrong !");
+          }
+        }}
+      >
+        {({ values, errors, handleSubmit, handleChange, handleBlur }) => {
+          return (
+            <form onSubmit={handleSubmit}>
+              <div className="flex flex-col mb-5">
+                <label
+                  htmlFor="phone"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
+                >
+                  Name:
+                </label>
+                <div className="relative">
+                  <div
+                    className="
                     inline-flex
                     items-center
                     justify-center
@@ -73,19 +90,18 @@ const Schema = Yup.object().shape({
                     w-10
                     text-gray-400
                   "
-            >
-              <i className="fas fa-at text-blue-500"></i>
-            </div>
+                  >
+                    <i className="fas fa-at text-blue-500"></i>
+                  </div>
 
-            <input 
-              type="name"
-              name="name"
-              id="name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.name}
-
-              className="
+                  <input
+                    type="name"
+                    name="name"
+                    id="name"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.name}
+                    className="
                     text-sm
                     placeholder-gray-500
                     pl-10
@@ -96,25 +112,21 @@ const Schema = Yup.object().shape({
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-              placeholder="Enter your phone number"
- 
-            />
-             {errors.name? (
-              <div>{errors.name}</div>
-            ) : null}
-  
-          </div>
-        </div>
-        <div className="flex flex-col mb-6">
-          <label
-            htmlFor="email"
-            className="mb-1 text-xs tracking-wide text-gray-600"
-          >
-            E-Mail Address:
-          </label>
-          <div className="relative">
-            <div
-              className="
+                    placeholder="Enter your phone number"
+                  />
+                  {errors.name ? <div>{errors.name}</div> : null}
+                </div>
+              </div>
+              <div className="flex flex-col mb-6">
+                <label
+                  htmlFor="email"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
+                >
+                  E-Mail Address:
+                </label>
+                <div className="relative">
+                  <div
+                    className="
                     inline-flex
                     items-center
                     justify-center
@@ -125,18 +137,18 @@ const Schema = Yup.object().shape({
                     w-10
                     text-gray-400
                   "
-            >
-              <i className="fas fa-at text-blue-500"></i>
-            </div>
+                  >
+                    <i className="fas fa-at text-blue-500"></i>
+                  </div>
 
-            <input 
-              type="email"
-              name="email"
-              id="email"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.email}
-              className="
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.email}
+                    className="
                     text-sm
                     placeholder-gray-500
                     pl-10
@@ -147,24 +159,21 @@ const Schema = Yup.object().shape({
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-              placeholder="Enter your email"
-          
-            />
-            {errors.email? (
-              <div>{errors.email}</div>
-            ) : null}
-          </div>
-        </div>
-        <div className="flex flex-col mb-6">
-          <label
-            htmlFor="password"
-            className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-          >
-            Password:
-          </label>
-          <div className="relative">
-            <div
-              className="
+                    placeholder="Enter your email"
+                  />
+                  {errors.email ? <div>{errors.email}</div> : null}
+                </div>
+              </div>
+              <div className="flex flex-col mb-6">
+                <label
+                  htmlFor="password"
+                  className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+                >
+                  Password:
+                </label>
+                <div className="relative">
+                  <div
+                    className="
                     inline-flex
                     items-center
                     justify-center
@@ -175,20 +184,20 @@ const Schema = Yup.object().shape({
                     w-10
                     text-gray-400
                   "
-            >
-              <span>
-                <i className="fas fa-lock text-blue-500"></i>
-              </span>
-            </div>
+                  >
+                    <span>
+                      <i className="fas fa-lock text-blue-500"></i>
+                    </span>
+                  </div>
 
-            <input 
-              type="password"
-              name="password"
-              id="password"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.password}
-              className="
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.password}
+                    className="
                     text-sm
                     placeholder-gray-500
                     pl-10
@@ -199,24 +208,21 @@ const Schema = Yup.object().shape({
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-              placeholder="Enter your password"
-       
-            />
-            {errors.password? (
-              <div>{errors.password}</div>
-            ) : null}
-          </div>
-        </div>
-        <div className="flex flex-col mb-6">
-          <label
-            htmlFor="password_comfirmation"
-            className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-          >
-            Password comfirmation:
-          </label>
-          <div className="relative">
-            <div
-              className="
+                    placeholder="Enter your password"
+                  />
+                  {errors.password ? <div>{errors.password}</div> : null}
+                </div>
+              </div>
+              <div className="flex flex-col mb-6">
+                <label
+                  htmlFor="password_comfirmation"
+                  className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+                >
+                  Password comfirmation:
+                </label>
+                <div className="relative">
+                  <div
+                    className="
                     inline-flex
                     items-center
                     justify-center
@@ -227,20 +233,20 @@ const Schema = Yup.object().shape({
                     w-10
                     text-gray-400
                   "
-            >
-              <span>
-                <i className="fas fa-lock text-blue-500"></i>
-              </span>
-            </div>
+                  >
+                    <span>
+                      <i className="fas fa-lock text-blue-500"></i>
+                    </span>
+                  </div>
 
-            <input 
-              type="Password"
-              name="password_comfirmation"
-              id="password_comfirmation"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.password_comfirmation}
-              className="
+                  <input
+                    type="Password"
+                    name="password_comfirmation"
+                    id="password_comfirmation"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.password_comfirmation}
+                    className="
                     text-sm
                     placeholder-gray-500
                     pl-10
@@ -251,17 +257,17 @@ const Schema = Yup.object().shape({
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-              placeholder="Enter your password_comfirmation"
-            />
-             {errors.password_comfirmation? (
-              <div>{errors.password_comfirmation}</div>
-            ) : null}
-          </div>
-        </div>
-        <div className="flex w-full">
-          <button
-            type="submit"
-            className="
+                    placeholder="Enter your password_comfirmation"
+                  />
+                  {errors.password_comfirmation ? (
+                    <div>{errors.password_comfirmation}</div>
+                  ) : null}
+                </div>
+              </div>
+              <div className="flex w-full">
+                <button
+                  type="submit"
+                  className="
                   flex
                   mt-2
                   items-center
@@ -278,24 +284,26 @@ const Schema = Yup.object().shape({
                   duration-150
                   ease-in
                 "
-          >
-            <span className="mr-2 uppercase">Sign Up</span>
-            <span>
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </span>
-          </button>
-        </div>
-      </form>)}}
+                >
+                  <span className="mr-2 uppercase">Sign Up</span>
+                  <span>
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </form>
+          );
+        }}
       </Formik>
       <SignUpFormLink linkSignIn={linkSignIn} />
     </div>

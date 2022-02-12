@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 // making a post request to create a user
 export const signUpUser = async (user, dispatch) => {
   // asynchronously post new user data request to specific end point
@@ -17,11 +18,11 @@ export const signUpUser = async (user, dispatch) => {
   })
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.headers.authorization));
-      console.log("token: " + res.headers.authorization);
       dispatch({
         type: "setLoggedInUser",
         payload: res.headers.authorization,
       });
+      return res.data.message
     })
     .catch((error) => {
       return error.response;
