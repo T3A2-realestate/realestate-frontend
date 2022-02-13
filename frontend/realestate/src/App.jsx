@@ -37,9 +37,11 @@ function App() {
         <Route exact path="/" element={<Login is_loggedIn={is_loggedIn}/>} />
         <Route exact path="/sign_In" element={<Login />} />
         <Route exact path="/sign_up" element={<SignUp />} />
+        <PrivateRoutes>
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/listing" element={<Listing />} />
         <Route exact path="/sell" element={<Sell />} />
+        </PrivateRoutes>
         <Route  element={<NotFound />} />
       </Routes>
     </>
