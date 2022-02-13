@@ -1,53 +1,47 @@
-import { useContext, useEffect } from 'react';
-
+import { useContext, useEffect } from "react";
 
 // Context
-import {userContext} from'../utils/userContext'
-
+import { userContext } from "../utils/userContext";
 
 // Redirect method
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 // Login Components
-import FormContainer from '../components/Form/FormContainer'
-import Form from '../components/Form/Form'
-import FormHeader from '../components/Form/FormHeader'
-import FormSubheader from '../components/Form/FormSubheader'
-import SignUpForm from '../components/Form/SignUpForm'
-
+import FormContainer from "../components/form/formContainer";
+import Form from "../components/form/form";
+import FormHeader from "../components/form/formHeader";
+import FormSubheader from "../components/form/formSubheader";
+import SignUpForm from "../components/form/signUpForm";
 
 function SignUp() {
-// Sign up form text
-const  header = 'Welcome 👏'
-const  subheader = 'Enter credentials to create your account'
-const  linkSignIn = {
-  status:'already',
-  LogIn:'Log In'
-}
+  // Sign up form text
+  const header = "Welcome 👏";
+  const subheader = "Enter credentials to create your account";
+  const linkSignIn = {
+    status: "already",
+    LogIn: "Log In",
+  };
 
-
-const { state: currentUserState } = useContext(userContext);
-const navigate = useNavigate();
-const is_loggedIn =
+  const { state: currentUserState } = useContext(userContext);
+  const navigate = useNavigate();
+  const is_loggedIn =
     !!localStorage.getItem("token") && !!currentUserState.token;
-    console.log(is_loggedIn)
+  console.log(is_loggedIn);
   useEffect(() => {
     if (is_loggedIn) {
-      navigate('/home')
+      navigate("/home");
     }
-  },[currentUserState])
-    return (
-     
-     <FormContainer>
-     <Form>
-     <FormHeader text={header} />
-     <FormSubheader text={subheader} />
-     
-     <SignUpForm linkSignIn={linkSignIn}/>
-     </Form>
-     </FormContainer>
- 
-    );
-  }
-  
-  export default SignUp;
+  }, [currentUserState]);
+  return (
+    <FormContainer>
+      <Form>
+        <FormHeader text={header} />
+        <FormSubheader text={subheader} />
+
+        <SignUpForm linkSignIn={linkSignIn} />
+      </Form>
+    </FormContainer>
+  );
+}
+
+export default SignUp;

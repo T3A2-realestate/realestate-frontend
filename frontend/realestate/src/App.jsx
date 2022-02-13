@@ -1,20 +1,20 @@
 import React, { useContext, useEffect } from "react";
 //Components
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import NarBar from "./components/NavBar";
+import Login from "./pages/login";
+import SignUp from "./pages/signUp";
+import NarBar from "./components/navBar";
 
 // Loading
-import Loading from "./pages/Loading";
+import Loading from "./pages/loading";
 //Router
 import { Routes, Route } from "react-router-dom";
 //Context
 import { userContext } from "./utils/userContext";
 //Page
-import Home from "./pages/Home";
-import Listing from "./pages/Listing";
-import Sell from "./pages/Sell";
-import NotFound from "./pages/NotFound";
+import Home from "./pages/home";
+import Listing from "./pages/listing";
+import Sell from "./pages/sell";
+import NotFound from "./pages/notFound";
 // Redirect method
 import { useNavigate } from "react-router-dom";
 
@@ -24,24 +24,21 @@ function App() {
   // try to identify if the user is logged in and have user data in local storage.
   const is_loggedIn =
     !!localStorage.getItem("token") && !!currentUserState.token;
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   // once the user state is changed then it will be rerendered
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <NarBar />
       <Routes>
-        <Route exact path="/" element={<Login is_loggedIn={is_loggedIn}/>} />
+        <Route exact path="/" element={<Login is_loggedIn={is_loggedIn} />} />
         <Route exact path="/sign_In" element={<Login />} />
         <Route exact path="/sign_up" element={<SignUp />} />
-
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/listing" element={<Listing />} />
         <Route exact path="/sell" element={<Sell />} />
-
-        <Route  element={<NotFound />} />
+        <Route element={<NotFound />} />
       </Routes>
     </>
   );

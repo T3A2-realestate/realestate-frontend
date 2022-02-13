@@ -6,10 +6,10 @@ import { userContext } from "../../utils/userContext";
 import { useNavigate } from "react-router-dom";
 
 // sub-component
-import SignUpFormLink from "./SignUpFormLink";
+import SignUpFormLink from "./signUpFormLink";
 
 // Form validation
-import { ErrorMessage ,Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 // toastify
 import { ToastContainer, toast } from "react-toastify";

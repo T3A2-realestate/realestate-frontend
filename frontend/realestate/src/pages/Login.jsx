@@ -3,18 +3,17 @@ import { useContext, useEffect } from 'react';
 
 // Context
 import {userContext} from'../utils/userContext'
-// Components
-import NavBar from '../components/NavBar';
+
 
 // Redirect method
 import { useNavigate } from 'react-router-dom'
 
 // Login Components
-import FormContainer from '../components/Form/FormContainer'
-import Form from '../components/Form/Form'
-import FormHeader from '../components/Form/FormHeader'
-import FormSubheader from '../components/Form/FormSubheader'
-import LogInForm from '../components/Form/LogInForm'
+import FormContainer from '../components/form/formContainer'
+import Form from '../components/form/form'
+import FormHeader from '../components/form/formHeader'
+import FormSubheader from '../components/form/formSubheader'
+import LogInForm from '../components/form/logInForm'
 
 function Login() {
 // login form text
