@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const API = axios.create({
 	// The base URL is required in an axios instance
-	baseURL: import.meta.env.VITE_APP_API_ENDPOINT || "http://localhost:3000",
+	baseURL: import.meta.env.VITE_APP_API_ENDPOINT || "https://realestate-app123.netlify.app/",
 	// I set the time out for request to be 10 seconds
 	timeout : 10000,
     // I set the request can have cookies
@@ -20,7 +20,7 @@ API.interceptors.request.use((config) => {
   // If there is a AuthorizationToken exists in the localStorage, then it will be assign to request header then the server knows 
   // user is logged in.
   config.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}` || '';
-  config.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
+  config.headers.common['Access-Control-Allow-Origin'] = 'https://realestate-rails-api.herokuapp.com/';
   config.headers.common['Content-Type'] = 'application/json;charset=UTF-8';
 	return config;
   }, (err) => {

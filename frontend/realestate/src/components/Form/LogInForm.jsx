@@ -5,7 +5,7 @@ import { userContext } from "../../utils/userContext";
 // Redirect method
 import { useNavigate } from "react-router-dom";
 // sub-component
-import FormLink from "./FormLink";
+import FormLink from "./formLink";
 
 // toastify
 import { ToastContainer, toast } from "react-toastify";
