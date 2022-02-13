@@ -7,7 +7,6 @@ import NarBar from "./components/NavBar";
 // Loading
 import Loading from "./pages/Loading";
 //Router
-import PrivateRoutes from "./routers/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 //Context
 import { userContext } from "./utils/userContext";
@@ -37,11 +36,11 @@ function App() {
         <Route exact path="/" element={<Login is_loggedIn={is_loggedIn}/>} />
         <Route exact path="/sign_In" element={<Login />} />
         <Route exact path="/sign_up" element={<SignUp />} />
-        <PrivateRoutes>
+
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/listing" element={<Listing />} />
         <Route exact path="/sell" element={<Sell />} />
-        </PrivateRoutes>
+
         <Route  element={<NotFound />} />
       </Routes>
     </>
