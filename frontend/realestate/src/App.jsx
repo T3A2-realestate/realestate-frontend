@@ -15,6 +15,7 @@ import { userContext } from "./utils/userContext";
 import Home from "./pages/Home";
 import Listing from "./pages/Listing";
 import Sell from "./pages/Sell";
+import NotFound from "./pages/NotFound";
 // Redirect method
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/listing" element={<Listing />} />
         <Route exact path="/sell" element={<Sell />} />
+        <Route  element={<NotFound />} />
       </Routes>
     </>
   );
